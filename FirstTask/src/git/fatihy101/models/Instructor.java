@@ -1,6 +1,8 @@
 package git.fatihy101.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +12,8 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name, address, phoneNumber;
+    @OneToMany(mappedBy = "instructor")
+    private List<Course> courseList = new ArrayList<>();
 
     public Instructor(String name, String address, String phoneNumber) {
         this.name = name;
@@ -67,5 +71,13 @@ public class Instructor {
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
     }
 }

@@ -1,9 +1,8 @@
 package git.fatihy101.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +12,12 @@ public class Course {
     private int id;
     private String courseName, courseCode;
     private int creditScore;
+
+    @ManyToMany
+    private List<Student> studentList = new ArrayList<>();
+
+    @ManyToOne
+    private Instructor instructor;
 
     public Course(String courseName, String courseCode, int creditScore) {
         this.courseName = courseName;
@@ -68,5 +73,21 @@ public class Course {
                 ", courseCode='" + courseCode + '\'' +
                 ", creditScore=" + creditScore +
                 '}';
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

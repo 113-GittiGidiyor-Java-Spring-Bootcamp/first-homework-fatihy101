@@ -1,10 +1,9 @@
 package git.fatihy101.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +14,9 @@ public class Student {
     private String name, address, gender;
     private LocalDate BirthDate;
 
+    @ManyToMany(mappedBy = "studentList")
+    private List<Course> courseList = new ArrayList<>();
+
     public Student(String name, String address, String gender, LocalDate birthDate) {
         this.name = name;
         this.address = address;
@@ -23,6 +25,14 @@ public class Student {
     }
 
     public Student() {
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -79,5 +89,13 @@ public class Student {
                 ", gender='" + gender + '\'' +
                 ", BirthDate=" + BirthDate +
                 '}';
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
     }
 }
